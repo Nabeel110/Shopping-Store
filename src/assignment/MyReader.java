@@ -67,9 +67,10 @@ public class MyReader {
             BufferedReader br = new BufferedReader(new FileReader("ItemOnSale.txt"));
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split("-");
-                Item item = new Item(Boolean.parseBoolean(parts[0]), parts[1], parts[2], Double.parseDouble(parts[3]), parts[4], parts[5], Double.parseDouble(parts[6]));
+                for (int i = 0; i < parts.length; i++) System.out.println(parts[i]+ ", ");
+                Item item = new Item(Boolean.parseBoolean(parts[0]), parts[1], parts[2], Double.parseDouble(parts[3]), parts[4], parts[5], Double.parseDouble(parts[6]), parts[7]);
                 item.setId(items.size());
-                item.setSellerId(Integer.parseInt(parts[7]));
+                item.setSellerId(Integer.parseInt(parts[8]));
                 items.add(item);
             }
 

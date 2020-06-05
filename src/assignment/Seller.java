@@ -35,7 +35,7 @@ public class Seller extends User {
             BufferedWriter bw = new BufferedWriter(fw);
             String parts[] = item.toString().split("-");
             Double successFees = Double.parseDouble(parts[6]); // to get the success fees from the toString method
-            String line = parts[0] + "-" + parts[1] + "-" + parts[2] + "-" + parts[3] + "-" + parts[4] + "-" + parts[5] + "-" + df2.format(successFees);
+            String line = parts[0] + "-" + parts[1] + "-" + parts[2] + "-" + parts[3] + "-" + parts[4] + "-" + parts[5] + "-" + df2.format(successFees) + "-" + parts[7];
             bw.write(line + "-" + getId() + System.lineSeparator());
             bw.close();
             incrementRating();
@@ -117,6 +117,7 @@ public class Seller extends User {
 
         try {
             BufferedReader br = new BufferedReader(new FileReader("SellerAccountDetails.txt"));
+            System.out.println("AMOUNT TO BE ADDED: " + amount);
             String strLine;
             String newLine = "";
             StringBuilder fileContent = new StringBuilder();
@@ -126,6 +127,7 @@ public class Seller extends User {
                     if (parts[1].equals(getId())) {
                         double bl = Double.parseDouble(parts[0]) + amount;
                         newLine = bl + "-" + parts[1];
+                        System.out.println("LINE O BE ADDED" + newLine);
                         fileContent.append(newLine);
                         fileContent.append("\n");
                     } else {

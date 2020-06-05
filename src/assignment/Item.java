@@ -2,6 +2,7 @@ package assignment;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 
@@ -16,8 +17,10 @@ public class Item {
     private int sellerId;
     private int itemId;
     private double successFees;
+    private String filename;
+    private String itemFile;
 
-    public Item(boolean avalibility, String itemTitle, String itemDescribtion, double itemPrice, String itemCategory, String methodOfDelivery, double successFees) {
+    public Item(boolean avalibility, String itemTitle, String itemDescribtion, double itemPrice, String itemCategory, String methodOfDelivery, double successFees, String itemIcon) {
         this.avalibility = avalibility;
         this.itemTitle = itemTitle;
         this.itemDescribtion = itemDescribtion;
@@ -25,6 +28,7 @@ public class Item {
         this.itemCategory = itemCategory;
         this.methodOfDelivery = methodOfDelivery;
         this.successFees = successFees;
+        this.itemFile = itemIcon;
     }
 
     public boolean getAvalibility() {
@@ -54,6 +58,10 @@ public class Item {
     public String getItemCategory() {
         return itemCategory;
     }
+    
+    public String getItemFile() {
+        return itemFile;
+    }
 
     public String getMethodOfDelivery() {
         return methodOfDelivery;
@@ -63,7 +71,9 @@ public class Item {
         return successFees;
     }
     
-    
+    public String getFile(){
+        return filename;
+    }
 
     public void setId(int itemId) {
         this.itemId = itemId;
@@ -71,6 +81,10 @@ public class Item {
 
     public void setSellerId(int sellerId) {
         this.sellerId = sellerId;
+    }
+    
+    public void setFile(String fileName){
+        this.filename = fileName;
     }
 
     public void setBought() {
@@ -119,7 +133,7 @@ public class Item {
 
     @Override
     public String toString() {
-        return avalibility + "-" + itemTitle + "-" + itemDescribtion + "-" + itemPrice + "-" + itemCategory + "-" + methodOfDelivery + "-" + successFees + "-" + getSellerId();
+        return avalibility + "-" + itemTitle + "-" + itemDescribtion + "-" + itemPrice + "-" + itemCategory + "-" + methodOfDelivery + "-" + successFees + "-" + itemFile + "-" + getSellerId();
     }
 
 }

@@ -5,7 +5,25 @@
  */
 package gui;
 
+import assignment.Item;
 import assignment.Seller;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
 
 /**
  *
@@ -140,10 +158,63 @@ public class SellerFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_viewSoldActionPerformed
 
     private void viewAllItemsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewAllItemsActionPerformed
-        SellerViewListedItems view = new SellerViewListedItems(seller);
-        this.setVisible(false);
-        view.setVisible(true);
+//TO UNCOMMENT IF THE FOLLOWING CODE DOESN'T WORK!
+//        SellerViewListedItems view = new SellerViewListedItems(seller);
+//        this.setVisible(false);
+//        view.setVisible(true);
+        //this.setVisible(false);
+        ArrayList<Item> items = seller.viewOwnListedItems();
+
+        JFrame frame = new JFrame();
+        frame.setMinimumSize(new Dimension(800, 600));
+
+        JPanel panel = new JPanel(new GridLayout(items.size(), 2, 5, 5));
+//        JButton b = new JButton("OK");
+//        b.setLocation(300, 300);
+//        b.setVisible(true);
+//        b.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                frame.setVisible(false);
+//                frame.dispose();
+//                new SellerFrame(seller).setVisible(true);
+//            }
+//        });
+//        frame.add(b);
+
+        for (Item item : items) {
+            JLabel iconLabel = new JLabel();
+            iconLabel.setSize(400, 250);
+            String file = item.getItemFile();
+            if (file.equals("")) {
+                iconLabel.setText("<html><div style='text-align: center;'> No Preview Available</div></html>");
+                iconLabel.setHorizontalAlignment(SwingConstants.CENTER);
+            } else {
+                iconLabel.setIcon(ResizeImage(file, iconLabel));
+            }
+            iconLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+            panel.add(iconLabel);
+
+            JLabel txt = new JLabel();
+            txt.setText("<html>" + " =================================================" + "<br>" + "Item title: " + item.getItemTitle() + "<br>" + " Item Describtion: " + item.getItemDescribtion() + "<br>" + " Item Price: " + "RM " + item.getItemPrice() + "<br>" + " Item Category: " + item.getItemCategory() + "<br>" + " Method of delivery: " + item.getMethodOfDelivery() + "<br>" + " =================================================" + "<br>" + "</html>");
+            panel.add(txt);
+        }
+
+        JScrollPane scr = new JScrollPane(panel);
+        frame.add(scr, BorderLayout.CENTER);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+
     }//GEN-LAST:event_viewAllItemsActionPerformed
+
+    public ImageIcon ResizeImage(String ImagePath, JLabel lab) {
+        ImageIcon MyImage = new ImageIcon(ImagePath);
+        Image img = MyImage.getImage();
+        Image newImg = img.getScaledInstance(lab.getWidth(), lab.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon image = new ImageIcon(newImg);
+        return image;
+    }
+
 
     private void updateDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateDetailsActionPerformed
         SellerEditDetails e = new SellerEditDetails(seller);

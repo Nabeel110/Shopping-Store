@@ -7,7 +7,22 @@ package gui;
 
 import assignment.Item;
 import assignment.Seller;
+import java.awt.BorderLayout;
+import java.awt.Button;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.Label;
 import java.util.ArrayList;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SpringLayout;
+import javax.swing.SwingConstants;
 
 /**
  *
@@ -37,8 +52,6 @@ public class SellerViewListedItems extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        SoldItems = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Trading System");
@@ -57,8 +70,6 @@ public class SellerViewListedItems extends javax.swing.JFrame {
             }
         });
 
-        jScrollPane1.setViewportView(SoldItems);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -67,17 +78,11 @@ public class SellerViewListedItems extends javax.swing.JFrame {
                 .addGap(228, 228, 228)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(254, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap(306, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(21, 21, 21))
         );
@@ -87,15 +92,42 @@ public class SellerViewListedItems extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         ArrayList<Item> items = seller.viewOwnListedItems();
-        SoldItems.setText("<html>");
-        for (Item item : items) {
-
-            SoldItems.setText(SoldItems.getText() + "Item title: " + item.getItemTitle() + "<br>" + " Item Describtion: " + item.getItemDescribtion() + "<br>" + " Item Price: " + "RM " + item.getItemPrice() + "<br>" + " Item Category: " + item.getItemCategory() + "<br>" + " Method of delivery: " + item.getMethodOfDelivery() + "<br>" + " =================================================" + "<br>");
+        JPanel p = new JPanel(new GridLayout(5, 4, 10, 10));
+        for (int i = 1; i <= 20; i++) {
+            p.add(new JLabel("Displaying label " + String.valueOf(i)));
         }
-        SoldItems.setText(SoldItems.getText() + "</html>");
+        add(p);
+        setVisible(true);
 
+        //jLabel1.setText("<html>");
+        //////////////////////////////
+//        for (Item item : items) {
+//            JLabel iconLabel = new JLabel();
+//            String file = item.getItemFile();
+//            iconLabel.setHorizontalAlignment(SwingConstants.LEFT);
+//            iconLabel.setIcon(ResizeImage(file));
+//            jLabel1.add(iconLabel);
+//
+//            JLabel txt = new JLabel();
+//            txt.setText("<html>");
+//            txt.setText(txt.getText() + "Item title: " + item.getItemTitle() + "<br>" + " Item Description: " + item.getItemDescribtion() + "<br>" + " Item Price: " + "RM " + item.getItemPrice() + "<br>" + " Item Category: " + item.getItemCategory() + "<br>" + " Method of delivery: " + item.getMethodOfDelivery() + "<br>" + " =================================================" + "<br>");
+//            txt.setText(iconLabel + "</html>");
+//            jLabel1.add(txt);
+//
+//            //jLabel1.setText(jLabel1 + "Item title: " + item.getItemTitle() + "<br>" + " Item Description: " + item.getItemDescribtion() + "<br>" + " Item Price: " + "RM " + item.getItemPrice() + "<br>" + " Item Category: " + item.getItemCategory() + "<br>" + " Method of delivery: " + item.getMethodOfDelivery() + "<br>" + " =================================================" + "<br>");
+//        }
+/////////////////////////
+        //jLabel1.setText(jLabel1 + "</html>");
 
     }//GEN-LAST:event_formWindowOpened
+
+//    public ImageIcon ResizeImage(String ImagePath) {
+//        ImageIcon MyImage = new ImageIcon(ImagePath);
+//        Image img = MyImage.getImage();
+//        Image newImg = img.getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_SMOOTH);
+//        ImageIcon image = new ImageIcon(newImg);
+//        return image;
+//    }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         SellerFrame s = new SellerFrame(seller);
@@ -139,8 +171,6 @@ public class SellerViewListedItems extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel SoldItems;
     private javax.swing.JButton jButton1;
-    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
