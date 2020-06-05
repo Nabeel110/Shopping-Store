@@ -152,9 +152,50 @@ public class SellerFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void viewSoldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewSoldActionPerformed
-        this.setVisible(false);
-        SellerViewSoldItems v = new SellerViewSoldItems(seller);
-        v.setVisible(true);
+//        this.setVisible(false);
+//        SellerViewSoldItems v = new SellerViewSoldItems(seller);
+//        v.setVisible(true);
+ArrayList<Item> items = seller.viewOwnSoldItems();
+
+        JFrame frame = new JFrame();
+        frame.setMinimumSize(new Dimension(800, 600));
+
+        JPanel panel = new JPanel(new GridLayout(items.size(), 2, 5, 5));
+//        JButton b = new JButton("OK");
+//        b.setLocation(300, 300);
+//        b.setVisible(true);
+//        b.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                frame.setVisible(false);
+//                frame.dispose();
+//                new SellerFrame(seller).setVisible(true);
+//            }
+//        });
+//        frame.add(b);
+
+        for (Item item : items) {
+            JLabel iconLabel = new JLabel();
+            iconLabel.setSize(400, 250);
+            String file = item.getItemFile();
+            if (file.equals("")) {
+                iconLabel.setText("<html><div style='text-align: center;'> No Preview Available</div></html>");
+                iconLabel.setHorizontalAlignment(SwingConstants.CENTER);
+            } else {
+                iconLabel.setIcon(ResizeImage(file, iconLabel));
+            }
+            iconLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+            panel.add(iconLabel);
+
+            JLabel txt = new JLabel();
+            txt.setText("<html>" + " =================================================" + "<br>" + "Item title: " + item.getItemTitle() + "<br>" + " Item Describtion: " + item.getItemDescribtion() + "<br>" + " Item Price: " + "RM " + item.getItemPrice() + "<br>" + " Item Category: " + item.getItemCategory() + "<br>" + " Method of delivery: " + item.getMethodOfDelivery() + "<br>" + " =================================================" + "<br>" + "</html>");
+            panel.add(txt);
+        }
+
+        JScrollPane scr = new JScrollPane(panel);
+        frame.add(scr, BorderLayout.CENTER);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
     }//GEN-LAST:event_viewSoldActionPerformed
 
     private void viewAllItemsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewAllItemsActionPerformed

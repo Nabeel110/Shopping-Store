@@ -1,6 +1,5 @@
-true-Toyota Car -Toyota-3500000.0-CAR-Pickup-525000.0-C:\Users\c w\Desktop\car.jpg-9
-true-Fixie Cycle-Cycle-50000.0-BICYCLE-Pickup-7500.0-C:\Users\c w\Desktop\cycle.jpg-9
-true-NJH Keyboard-A beautiful keyboard smooth-10000.0-TECH-Delivery-1500.0-C:\Users\c w\Desktop\keyboard.jpg-9
-true-RGB Mouse-Smooth Fast Mouse-4760.0-TECH-Delivery-714.0-C:\Users\c w\Desktop\mouse.jpg-9
+true-Toyota Car -Toyota-3500000.0-CAR-Pickup-525000.0-.\itemImages\car.jpg-9
+true-Fixie Cycle-Cycle-50000.0-BICYCLE-Pickup-7500.0-.\itemImages\cycle.jpg-9
+true-NJH Keyboard-A beautiful keyboard smooth-10000.0-TECH-Delivery-1500.0-.\itemImages\keyboard.jpg-9
+true-RGB Mouse-Smooth Fast Mouse-4760.0-TECH-Delivery-714.0-.\itemImages\mouse.jpg-9
 true-74B Speakers-High Intensity-3390.0-TECH-Delivery-508.5--9
-false-logo-Great-100.0-LOGO DESIGN-Pickup-5.0-E:\Graphics\_transparent.png

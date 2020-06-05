@@ -6,8 +6,22 @@
 package gui;
 
 import assignment.Buyer;
+import assignment.Item;
 import assignment.MyReader;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.util.ArrayList;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
 
 /**
  *
@@ -133,13 +147,50 @@ public class BuyerFrame extends javax.swing.JFrame {
 
     private void purchaseItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purchaseItemActionPerformed
         if (MyReader.getAvailableItems().size() > 0) {
-            BuyerPurchaseItem b = new BuyerPurchaseItem(buyer);
-            this.setVisible(false);
-            b.setVisible(true);
+//            BuyerPurchaseItem b = new BuyerPurchaseItem(buyer);
+//            this.setVisible(false);
+//            b.setVisible(true);
+            ArrayList<Item> items = MyReader.getAvailableItems();
+
+            JFrame frame = new JFrame();
+            frame.setMinimumSize(new Dimension(800, 600));
+
+            JPanel panel = new JPanel(new GridLayout(items.size(), 2, 5, 5));
+
+            for (Item item : items) {
+                JLabel iconLabel = new JLabel();
+                iconLabel.setSize(400, 250);
+                String file = item.getItemFile();
+                if (file.equals("")) {
+                    iconLabel.setText("<html><div style='text-align: center;'> No Preview Available</div></html>");
+                    iconLabel.setHorizontalAlignment(SwingConstants.CENTER);
+                } else {
+                    iconLabel.setIcon(ResizeImage(file, iconLabel));
+                }
+                iconLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+                panel.add(iconLabel);
+
+                JLabel txt = new JLabel();
+                txt.setText("<html>" + " =================================================" + "<br>" + "Item title: " + item.getItemTitle() + "<br>" + " Item Describtion: " + item.getItemDescribtion() + "<br>" + " Item Price: " + "RM " + item.getItemPrice() + "<br>" + " Item Category: " + item.getItemCategory() + "<br>" + " Method of delivery: " + item.getMethodOfDelivery() + "<br>" + " =================================================" + "<br>" + "</html>");
+                panel.add(txt);
+            }
+
+            JScrollPane scr = new JScrollPane(panel);
+            frame.add(scr, BorderLayout.CENTER);
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(null, "No avaliable Items to be bought", "No Items", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_purchaseItemActionPerformed
+
+    public ImageIcon ResizeImage(String ImagePath, JLabel lab) {
+        ImageIcon MyImage = new ImageIcon(ImagePath);
+        Image img = MyImage.getImage();
+        Image newImg = img.getScaledInstance(lab.getWidth(), lab.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon image = new ImageIcon(newImg);
+        return image;
+    }
 
     private void viewRecordsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewRecordsActionPerformed
         BuyerViewOwnBoughtRecords view = new BuyerViewOwnBoughtRecords(buyer);
@@ -160,7 +211,7 @@ public class BuyerFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_logoutActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-     welcomeLabel.setText("Welcome" + " " + buyer.getName() + ", " + "Your Rating is:" + " " + buyer.getRating());
+        welcomeLabel.setText("Welcome" + " " + buyer.getName() + ", " + "Your Rating is:" + " " + buyer.getRating());
 
     }//GEN-LAST:event_formWindowOpened
 
